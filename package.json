@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/react-leaflet": "^1.1.4",
+    "leaflet": "^1.2.0",
+    "prop-types": "^15.6.0",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "react-leaflet": "^1.7.0"
   },
   "devDependencies": {
     "@types/jest": "^21.1.1",
