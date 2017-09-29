@@ -20,6 +20,10 @@
   version "8.0.31"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.31.tgz#d9af61093cf4bfc9f066ca34de0175012cfb0ce9"
 
+"@types/prop-types@^15.5.2":
+  version "15.5.2"
+  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.2.tgz#3c6b8dceb2906cc87fe4358e809f9d20c8d59be1"
+
 "@types/ramda@^0.24.14":
   version "0.24.14"
   resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.24.14.tgz#bdd312c461934bc09a79745d77b6952302bf6b02"

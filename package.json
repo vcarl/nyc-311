@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/prop-types": "^15.5.2",
     "@types/ramda": "^0.24.14",
     "@types/react-leaflet": "^1.1.4",
     "axios": "^0.16.2",
