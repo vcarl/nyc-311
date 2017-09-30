@@ -2,6 +2,7 @@ import * as React from "react";
 import { CityRequest } from "./request311";
 import { Marker, Popup } from "react-leaflet";
 import { Bounds } from "./MapBounds";
+import RequestMarker from "./RequestMarker";
 
 interface Props {
   bounds: Bounds;
@@ -36,13 +37,7 @@ export default class ComplaintMap extends React.Component<Props, {}> {
             return (
               <Marker key={request.unique_key} position={coordinates}>
                 <Popup>
-                  <div>
-                    <div>
-                      {request.agency} - {request.agency_name}
-                    </div>
-                    <div>{request.descriptor}</div>
-                    <div />
-                  </div>
+                  <RequestMarker request={request} />
                 </Popup>
               </Marker>
             );
