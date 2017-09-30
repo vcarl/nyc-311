@@ -5,6 +5,7 @@ import { CityRequest } from "./request311";
 import MapBounds from "./MapBounds";
 import RequestMarkers from "./RequestMarkers";
 import * as PropTypes from "prop-types";
+import "./RequestMap.css";
 
 const accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 const position = { lat: 40.710934, lng: -73.965134 };
@@ -23,7 +24,7 @@ export default class RequestMap extends React.Component<Props, {}> {
   handleViewportChange = () => {};
   render() {
     return (
-      <Map center={position} zoom={13} style={{ height: "100vh" }}>
+      <Map center={position} zoom={13}>
         <TileLayer
           url={`https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/{z}/{x}/{y}?access_token=${accessToken}`}
         />
