@@ -2,6 +2,8 @@ import * as React from "react";
 import request311, { CityRequest } from "./request311";
 import RequestMap from "./RequestMap";
 
+import "./App.css";
+
 interface State {
   requests: {
     status: string;
