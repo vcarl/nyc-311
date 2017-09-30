@@ -24,7 +24,7 @@ export default class RequestMap extends React.Component<Props, {}> {
   handleViewportChange = () => {};
   render() {
     return (
-      <Map center={position} zoom={13}>
+      <Map center={position} zoom={13} minZoom={12}>
         <TileLayer
           url={`https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/{z}/{x}/{y}?access_token=${accessToken}`}
         />
