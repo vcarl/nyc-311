@@ -2205,6 +2205,12 @@ he@1.1.x:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
 
+hepa@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/hepa/-/hepa-0.0.4.tgz#81f0b110a71fb29304d3982c116942f8cfaca026"
+  dependencies:
+    tslib "^1.7.1"
+
 hmac-drbg@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
