@@ -7,3 +7,13 @@
     flex-direction: column-reverse;
   }
 }
+
+.controls {
+  padding: 1rem;
+}
+
+.loading-state {
+  padding: 2rem;
+  width: 100%;
+  font-size: 2rem;
+}
