@@ -2,6 +2,7 @@ import * as React from "react";
 import request311, { CityRequest } from "./request311";
 import RequestMap from "./RequestMap";
 import Sidebar from "./Sidebar";
+import Attribution from "./Attribution";
 import { FilterProvider, Filter } from "hepa";
 
 import "./App.css";
@@ -74,6 +75,7 @@ class App extends React.Component<{}, State> {
               requests={this.state.requests.data}
               refresh={this.fetchRequests}
             />
+            <Attribution />
           </div>
         </div>
       </TypedFilterProvider>
