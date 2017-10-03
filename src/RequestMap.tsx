@@ -15,13 +15,9 @@ interface Props {
 }
 
 export default class RequestMap extends React.Component<Props, {}> {
-  state = {
-    viewport: {}
-  };
   static contextTypes = {
     map: PropTypes.instanceOf(LeafletMap)
   };
-  handleViewportChange = () => {};
   render() {
     return (
       <Map center={position} zoom={13} minZoom={12}>
