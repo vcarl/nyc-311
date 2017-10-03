@@ -13,10 +13,11 @@ const SelectFilter = ({
   children,
   ...rest
 }: {
-  name: string;
-  children: (JSX.Element | JSX.Element[])[];
-  [key: string]: any;
-}) => {
+    name: string;
+    children: (JSX.Element | JSX.Element[])[];
+    // tslint:disable-next-line:no-any
+    [key: string]: any;
+  }) => {
   type TypedExact = new () => Exact<CityRequest>;
   const TypedExact = Exact as TypedExact;
   return (
@@ -26,13 +27,13 @@ const SelectFilter = ({
         value,
         onChange
       }: {
-        value: string;
-        onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-      }) => (
-        <select value={value} onChange={onChange} {...rest}>
-          {children}
-        </select>
-      )}
+          value: string;
+          onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+        }) => (
+          <select value={value} onChange={onChange} {...rest}>
+            {children}
+          </select>
+        )}
     />
   );
 };

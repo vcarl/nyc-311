@@ -9,6 +9,7 @@ export interface Bounds {
 }
 
 interface Props {
+  // tslint:disable-next-line:no-any
   render: ({ bounds }: { bounds: Bounds }) => React.ReactElement<any>;
 }
 
