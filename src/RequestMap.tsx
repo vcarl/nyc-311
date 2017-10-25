@@ -1,23 +1,33 @@
 import * as React from "react";
-import { Map, TileLayer } from "react-leaflet";
-import { Map as LeafletMap } from "leaflet";
+import { Marker, Popup, Map, TileLayer } from "react-leaflet";
+import RequestMarker from "./RequestMarker";
 import { CityRequest } from "./request311";
-import MapBounds from "./MapBounds";
-import RequestMarkers from "./RequestMarkers";
-import * as PropTypes from "prop-types";
+import MapBounds, { Bounds } from "./MapBounds";
 import "./RequestMap.css";
 
 const accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 const position = { lat: 40.710934, lng: -73.965134 };
 
 interface Props {
-  requests: CityRequest[];
+  requests: string[];
+  lookup: { [key: string]: CityRequest };
+}
+
+function filterByBounds(bounds: Bounds) {
+  return function compareRequests(request: CityRequest) {
+    const lng = Number(request.location.coordinates[0]);
+    const lat = Number(request.location.coordinates[1]);
+
+    return (
+      lng > bounds.southWest.lng &&
+      lng < bounds.northEast.lng &&
+      lat > bounds.southWest.lat &&
+      lat < bounds.northEast.lat
+    );
+  };
 }
 
 export default class RequestMap extends React.Component<Props, {}> {
-  static contextTypes = {
-    map: PropTypes.instanceOf(LeafletMap)
-  };
   render() {
     return (
       <Map center={position} zoom={13} minZoom={12}>
@@ -26,7 +36,24 @@ export default class RequestMap extends React.Component<Props, {}> {
         />
         <MapBounds
           render={({ bounds }) => (
-            <RequestMarkers bounds={bounds} requests={this.props.requests} />
+            <div>
+              {this.props.requests
+                .map(id => this.props.lookup[id])
+                .filter(filterByBounds(bounds))
+                .map(request => {
+                  const coordinates = {
+                    lng: Number(request.location.coordinates[0]),
+                    lat: Number(request.location.coordinates[1])
+                  };
+                  return (
+                    <Marker key={request.unique_key} position={coordinates}>
+                      <Popup>
+                        <RequestMarker request={request} />
+                      </Popup>
+                    </Marker>
+                  );
+                })}
+            </div>
           )}
         />
       </Map>
