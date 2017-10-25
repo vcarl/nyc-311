@@ -11,7 +11,10 @@ import "./bootstrap.css";
 
 interface State {
   requests: FetchedData;
+  filter: FilterState;
 }
+
+type FilterState = { group: string; predicate?: Function };
 
 type FetchedData = {
   status: string;
@@ -19,7 +22,7 @@ type FetchedData = {
   data: DataMap;
 };
 
-type DataMap = {
+export type DataMap = {
   keyed: { [key: string]: CityRequest };
   byAgency: { [key: string]: string[] };
   byBorough: { [key: string]: string[] };
@@ -35,6 +38,18 @@ const handleData = (data: CityRequest[]) => {
   return requests;
 };
 
+const filterData = (data: DataMap, filter: FilterState): string[] => {
+  if (filter.predicate === undefined) {
+    if (filter.group !== "") {
+      return data.byAgency[filter.group];
+    }
+    return Object.keys(data.keyed);
+  }
+  return Object.values(data.keyed)
+    .filter(x => (filter.predicate as Function)(x))
+    .map(x => x.unique_key);
+};
+
 const emptyData: DataMap = {
   keyed: {},
   byAgency: {},
@@ -47,6 +62,10 @@ class App extends React.Component<{}, State> {
       status: "pending",
       error: "",
       data: emptyData
+    },
+    filter: {
+      group: "",
+      predicate: undefined
     }
   };
   componentDidMount() {
@@ -70,6 +89,9 @@ class App extends React.Component<{}, State> {
         this.setState({ requests: { status: "error", error, data: emptyData } })
       );
   };
+  handleFilterChange = (filter: FilterState) => {
+    this.setState({ filter });
+  };
   render() {
     type TypedFilterProvider = new () => FilterProvider<CityRequest>;
     const TypedFilterProvider = FilterProvider as TypedFilterProvider;
@@ -77,31 +99,29 @@ class App extends React.Component<{}, State> {
     return (
       <TypedFilterProvider>
         <div className="app-root">
-          {(function(requests: FetchedData) {
+          {((requests: FetchedData) => {
             switch (requests.status) {
               case "error":
                 return <div>JSON.stringify(requests.error)</div>;
               case "pending":
                 return <div className="loading-state">loading...</div>;
               default:
-                type TypedFilter = new () => Filter<CityRequest>;
+                type TypedFilter = new () => Filter<DataMap>;
                 const TypedFilter = Filter as TypedFilter;
                 return (
-                  <TypedFilter
-                    style={{ width: "100%" }}
-                    data={Object.values(requests.data.keyed)}
-                    render={data => <RequestMap requests={data} />}
+                  <RequestMap
+                    lookup={requests.data.keyed}
+                    requests={filterData(requests.data, this.state.filter)}
                   />
                 );
             }
           })(this.state.requests)}
           <div className="controls">
-            {
-              <Sidebar
-                requests={this.state.requests.data.keyed}
-                refresh={this.fetchRequests}
-              />
-            }
+            <Sidebar
+              requests={this.state.requests.data}
+              refresh={this.fetchRequests}
+              onFilterChange={this.handleFilterChange}
+            />
             <Attribution />
           </div>
         </div>
