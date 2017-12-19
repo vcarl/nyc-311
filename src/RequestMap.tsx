@@ -2,7 +2,7 @@ import * as React from "react";
 import { Marker, Popup, Map, TileLayer } from "react-leaflet";
 import RequestMarker from "./RequestMarker";
 import { CityRequest } from "./request311";
-import MapBounds, { Bounds } from "./MapBounds";
+import MapBounds, { Bounds } from "react-leaflet-bounds";
 import "./RequestMap.css";
 
 const accessToken = process.env.REACT_APP_MAPBOX_TOKEN;

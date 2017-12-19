@@ -4358,6 +4358,12 @@ react-error-overlay@^2.0.2:
     settle-promise "1.0.0"
     source-map "0.5.6"
 
+react-leaflet-bounds@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/react-leaflet-bounds/-/react-leaflet-bounds-0.0.0.tgz#d7aa37a56b71ecc629b0fb6809c8ce806a702b96"
+  dependencies:
+    tslib "^1.7.1"
+
 react-leaflet@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-1.7.0.tgz#bfafc72aeb978d2e91638344b7991d2da12901ae"
